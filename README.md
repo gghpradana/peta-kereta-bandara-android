@@ -1,0 +1,2 @@
+# gipsy
+Skripsi Saya Sukses
