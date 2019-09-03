@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     Button aboutme;
     LinearLayout KA_btn;
     LinearLayout rute_btn;
+    LinearLayout peta_btn;
 
 
     @Override
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         aboutme = (Button) findViewById(R.id.aboutme);
         KA_btn = (LinearLayout) findViewById(R.id.KA_btn);
         rute_btn = (LinearLayout) findViewById(R.id.rute_btn);
+        peta_btn = (LinearLayout) findViewById(R.id.peta_btn);
 
         aboutme.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListruteActivity.class);
+                startActivity(intent);
+            }
+        });
+        peta_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });

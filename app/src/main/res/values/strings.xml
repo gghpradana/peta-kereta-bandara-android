@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KA Bandara Soetta</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
