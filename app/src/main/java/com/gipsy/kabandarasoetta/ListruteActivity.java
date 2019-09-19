@@ -36,42 +36,88 @@ public class ListruteActivity extends AppCompatActivity implements RuteAdapter.O
     }
 
     private void prepareRuteData() {
-        Rute rute = new Rute("Bandara - Bekasi");
+        Rute rute = new Rute("Bekasi - Bandara");
+        ruteList.add(rute);
+
+        rute = new Rute("Bandara - Bekasi");
+        ruteList.add(rute);
+
+        rute = new Rute("BNI City - Bandara");
         ruteList.add(rute);
 
         rute = new Rute("Bandara - BNI City");
         ruteList.add(rute);
 
-        rute = new Rute("Bandara - Duri");
+      /*  rute = new Rute("BNI City - Bandara");
         ruteList.add(rute);
 
-        rute = new Rute("Bandara - Batu Ceper");
+        rute = new Rute("BNI CIty - Duri");
         ruteList.add(rute);
 
-        rute = new Rute("Batu Ceper - Bekasi");
+        rute = new Rute("BNI City - Batu Ceper");
         ruteList.add(rute);
 
-        rute = new Rute("Batu Ceper - BNI City");
+        rute = new Rute("Duri - Bandara");
         ruteList.add(rute);
 
-        rute = new Rute("Batu Ceper - Duri");
+        rute = new Rute("Duri - Batu Ceper");
         ruteList.add(rute);
 
-        rute = new Rute("Duri - Bekasi");
+        rute = new Rute("Batu Ceper - Bandara");
         ruteList.add(rute);
-
-        rute = new Rute("Duri - BNI City");
-        ruteList.add(rute);
-
-        rute = new Rute("BNI City - Bekasi");
-        ruteList.add(rute);
-
+        */
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onNoteClick(int position) {
-        Intent intent = new Intent(this,DetailRuteActivity.class);
-        startActivity(intent);
+        Intent intent;
+        switch (position) {
+            //first item
+            case 0:
+                intent = new Intent(ListruteActivity.this, BksBanActivity.class);
+                startActivity(intent);
+                break;
+            //second item
+            case 1:
+                intent = new Intent(ListruteActivity.this, BanBksActivity.class);
+                startActivity(intent);
+                break;
+            //third item
+     /*       case 2:
+                intent = new Intent(ListruteActivity.this, BksDurActivity.class);
+                startActivity(intent);
+                break;
+            //fourth item
+            case 3:
+                intent = new Intent(ListruteActivity.this, BksBatActivity.class);
+                startActivity(intent);
+                break;
+            //fifth item
+            case 4:
+                intent = new Intent(ListruteActivity.this, BniBanActivity.class);
+                startActivity(intent);
+                break;
+            case 5:
+                intent = new Intent(ListruteActivity.this, BniDurActivity.class);
+                startActivity(intent);
+                break;
+            case 6:
+                intent = new Intent(ListruteActivity.this, BniBatActivity.class);
+                startActivity(intent);
+                break;
+            case 7:
+                intent = new Intent(ListruteActivity.this, DurBanActivity.class);
+                startActivity(intent);
+                break;
+            case 8:
+                intent = new Intent(ListruteActivity.this, DurBatActivity.class);
+                startActivity(intent);
+                break;
+            case 9:
+                intent = new Intent(ListruteActivity.this, BatBanActivity.class);
+                startActivity(intent);
+                break;
+      */  }
     }
 }

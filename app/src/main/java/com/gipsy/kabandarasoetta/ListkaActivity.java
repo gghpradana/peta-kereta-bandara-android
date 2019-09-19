@@ -57,7 +57,29 @@ public class ListkaActivity extends AppCompatActivity implements StasiunAdapter.
 
     @Override
     public void onNoteClick(int position) {
-        Intent intent = new Intent(this, DetailStasiun.class);
-        startActivity(intent);
+        Intent intent;
+        switch (position) {
+            //first item
+            case 0: intent = new Intent(ListkaActivity.this, StBekasiActivity.class);
+                startActivity(intent);
+                break;
+            //second item
+            case 1: intent = new Intent(ListkaActivity.this, StBNIActivity.class);
+            startActivity(intent);
+            break;
+            //third item
+            case 2: intent = new Intent(ListkaActivity.this, StDuriActivity.class);
+                startActivity(intent);
+                break;
+            //fourth item
+            case 3: intent = new Intent(ListkaActivity.this, StBatuActivity.class);
+                startActivity(intent);
+                break;
+            //fifth item
+            case 4: intent = new Intent(ListkaActivity.this, StBandaraActivity.class);
+                startActivity(intent);
+                break;
+        }
+
     }
 }
