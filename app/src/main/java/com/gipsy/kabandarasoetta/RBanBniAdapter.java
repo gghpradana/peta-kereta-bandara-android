@@ -11,20 +11,20 @@ import com.github.vipulasri.timelineview.TimelineView;
 
 import java.util.List;
 
-public class RBanBksAdapter extends RecyclerView.Adapter<RBanBksAdapter.ViewHolder>{
+public class RBanBniAdapter extends RecyclerView.Adapter<RBanBniAdapter.ViewHolder> {
 
-    private List<RBanBks> rBanBksList;
+    private List<RBanBni> rBanBniList;
     private Context context;
-    private RBanBksAdapter.OnNoteListener mOneNoteListener;
+    private RBanBniAdapter.OnNoteListener mOneNoteListener;
     public TimelineView mTimelineView;
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView Stopanbanbks;
-        RBanBksAdapter.OnNoteListener onNoteListener;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView Stopanbanbni;
+        RBanBniAdapter.OnNoteListener onNoteListener;
 
-        public ViewHolder(View view, RBanBksAdapter.OnNoteListener onNoteListener, int viewType) {
+        public ViewHolder(View view, RBanBniAdapter.OnNoteListener onNoteListener, int viewType) {
             super(view);
-            Stopanbanbks = (TextView) view.findViewById(R.id.stopanbanbks);
+            Stopanbanbni = (TextView) view.findViewById(R.id.stopanbanbni);
             mTimelineView = (TimelineView) itemView.findViewById(R.id.timeline);
             mTimelineView.initLine(viewType);
 
@@ -37,24 +37,22 @@ public class RBanBksAdapter extends RecyclerView.Adapter<RBanBksAdapter.ViewHold
             onNoteListener.onNoteClick(getAdapterPosition());
         }
     }
-
-    public RBanBksAdapter(Context context, List<RBanBks> rBanBksList, RBanBksAdapter.OnNoteListener onNoteListener) {
-        this.rBanBksList = rBanBksList;
+    public RBanBniAdapter(Context context, List<RBanBni> rBanBniList, RBanBniAdapter.OnNoteListener onNoteListener) {
+        this.rBanBniList = rBanBniList;
         this.context = context;
         this.mOneNoteListener = onNoteListener;
     }
 
     @Override
-    public RBanBksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RBanBniAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.rbanbks_list, parent,false);
-        return new RBanBksAdapter.ViewHolder(itemView, mOneNoteListener, viewType);
+                .inflate(R.layout.rbanbni_list, parent,false);
+        return new RBanBniAdapter.ViewHolder(itemView, mOneNoteListener, viewType);
     }
-
     @Override
-    public void onBindViewHolder(RBanBksAdapter.ViewHolder holder, int position) {
-        RBanBks rBanBks = rBanBksList.get(position);
-        holder.Stopanbanbks.setText(rBanBks.getStopanbanbks());
+    public void onBindViewHolder(RBanBniAdapter.ViewHolder holder, int position) {
+        RBanBni rBanBni = rBanBniList.get(position);
+        holder.Stopanbanbni.setText(rBanBni.getStopanbanbni());
     }
 
     @Override
@@ -64,11 +62,10 @@ public class RBanBksAdapter extends RecyclerView.Adapter<RBanBksAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return rBanBksList.size();
+        return rBanBniList.size();
     }
 
     public interface OnNoteListener {
         void onNoteClick(int position);
-
     }
 }

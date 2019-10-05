@@ -15,7 +15,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -41,12 +40,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallback, RBksbanAdapter.OnNoteListener {
+public class BniBanActivity extends AppCompatActivity implements OnMapReadyCallback,RBniBanAdapter.OnNoteListener {
+
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
-    private List<RBksban> rBksbanList;
+    private List<RBniBan> rBniBanList;
     private RecyclerView recyclerView;
-    private RBksbanAdapter mAdapter;
+    private RBniBanAdapter mAdapter;
 
     CollapsingToolbarLayout collapsingToolbarLayout;
     private GoogleMap mMap;
@@ -57,10 +57,10 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bks_ban);
+        setContentView(R.layout.activity_bni_ban);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapbksban);
+                .findFragmentById(R.id.mapbniban);
         mapFragment.getMapAsync(this);
 
         final Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
@@ -71,7 +71,7 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.Putih));
         collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#00FFFFFF"));
 
-        AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        AppBarLayout mAppBarLayout = (AppBarLayout)findViewById(R.id.appbar);
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
         behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
@@ -82,33 +82,31 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
         });
         params.setBehavior(behavior);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_bksban);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_bniban);
 
-        rBksbanList = new ArrayList<>();
-        mAdapter = new RBksbanAdapter(getApplicationContext(), rBksbanList, this);
+        rBniBanList = new ArrayList<>();
+        mAdapter = new RBniBanAdapter(getApplicationContext(), rBniBanList, this);
 
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         dividerItemDecoration = new
-                DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
+                DividerItemDecoration(recyclerView.getContext(),linearLayoutManager.getOrientation());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(mAdapter);
 
-        wilayah = new LatLngBounds(new LatLng(-6.236621, 106.652243), new LatLng(-6.127407, 106.999197));
-
+        wilayah = new LatLngBounds(new LatLng(-6.201566, 106.652243), new LatLng(-6.127407, 106.819694));
 
         getData();
     }
-
     private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        String url = "https://gipsygis.000webhostapp.com/api/gipsy/getstasiun.php";
+        String url = "https://gipsygis.000webhostapp.com/api/gipsy/getbniban.php";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -126,10 +124,10 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
                                 .title(nama)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
-                        RBksban rBksban = new RBksban();
-                        rBksban.setStopanbksban(data.getString("NAMA_STASIUN"));
+                        RBniBan rBniBan = new RBniBan();
+                        rBniBan.setStopanbniban(data.getString("NAMA_STASIUN"));
 
-                        rBksbanList.add(rBksban);
+                        rBniBanList.add(rBniBan);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -142,7 +140,7 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BksBanActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(BniBanActivity.this);
                 builder.setTitle("Error!");
                 builder.setMessage("No Internet Connection");
                 builder.setIcon(android.R.drawable.ic_dialog_alert);
@@ -159,7 +157,6 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -167,10 +164,10 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(wilayah.getCenter(), 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(wilayah.getCenter(), 11));
 
         try {
-            KmlLayer kmlLayer = new KmlLayer(mMap, R.raw.bksban, getApplicationContext());
+            KmlLayer kmlLayer = new KmlLayer(mMap, R.raw.bniban, getApplicationContext());
             kmlLayer.addLayerToMap();
         } catch (IOException e) {
             e.printStackTrace();
@@ -185,33 +182,29 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
         switch (position) {
             //first item
             case 0:
-                intent = new Intent(BksBanActivity.this, JadBksActivity.class);
+                intent = new Intent(BniBanActivity.this, JadBni2Activity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbnipergi.php");
                 startActivity(intent);
                 break;
             //second item
             case 1:
-                intent = new Intent(BksBanActivity.this, JadBniActivity.class);
-                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbksbni.php");
+                intent = new Intent(BniBanActivity.this, JadDurActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjaddurpergi.php");
                 startActivity(intent);
                 break;
             //third item
             case 2:
-                intent = new Intent(BksBanActivity.this, JadDurActivity.class);
-                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbksdur.php");
+                intent = new Intent(BniBanActivity.this, JadBatActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbatpergi.php");
                 startActivity(intent);
                 break;
             //fourth item
             case 3:
-                intent = new Intent(BksBanActivity.this, JadBatActivity.class);
-                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbksbat.php");
+                intent = new Intent(BniBanActivity.this, JadBanActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbanpergi.php");
                 startActivity(intent);
                 break;
-            //fifth item
-            case 4:
-                intent = new Intent(BksBanActivity.this, JadBanActivity.class);
-                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbksban.php");
-                startActivity(intent);
-                break;
+
         }
     }
 }

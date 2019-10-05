@@ -70,7 +70,7 @@ public class BanBksActivity extends AppCompatActivity implements OnMapReadyCallb
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.Putih));
         collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#00FFFFFF"));
 
-        AppBarLayout mAppBarLayout = (AppBarLayout)findViewById(R.id.appbar);
+        AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
         behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
@@ -89,7 +89,7 @@ public class BanBksActivity extends AppCompatActivity implements OnMapReadyCallb
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         dividerItemDecoration = new
-                DividerItemDecoration(recyclerView.getContext(),linearLayoutManager.getOrientation());
+                DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -180,9 +180,40 @@ public class BanBksActivity extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void onNoteClick(int position) {
-        Intent intent = new Intent(this, DetailRuteActivity.class);
-        startActivity(intent);
+        Intent intent;
+        switch (position) {
+            //first item
+            case 0:
+                intent = new Intent(BanBksActivity.this, JadBanrActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbanbks.php");
+                startActivity(intent);
+                break;
+            //second item
+            case 1:
+                intent = new Intent(BanBksActivity.this, JadBatrActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbatbks.php");
+                startActivity(intent);
+                break;
+            //third item
+            case 2:
+                intent = new Intent(BanBksActivity.this, JadDurrActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjaddurbks.php");
+                startActivity(intent);
+                break;
+            //fourth item
+            case 3:
+                intent = new Intent(BanBksActivity.this, JadBnirActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getjadbnibks.php");
+                startActivity(intent);
+                break;
+            //fifth item
+            case 4:
+                intent = new Intent(BanBksActivity.this, JadBksrActivity.class);
+                intent.putExtra("url", "https://gipsygis.000webhostapp.com/api/gipsy/getbekasikedpulang.php");
+                startActivity(intent);
+                break;
 
+        }
     }
 }
 

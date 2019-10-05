@@ -48,24 +48,6 @@ public class ListruteActivity extends AppCompatActivity implements RuteAdapter.O
         rute = new Rute("Bandara - BNI City");
         ruteList.add(rute);
 
-      /*  rute = new Rute("BNI City - Bandara");
-        ruteList.add(rute);
-
-        rute = new Rute("BNI CIty - Duri");
-        ruteList.add(rute);
-
-        rute = new Rute("BNI City - Batu Ceper");
-        ruteList.add(rute);
-
-        rute = new Rute("Duri - Bandara");
-        ruteList.add(rute);
-
-        rute = new Rute("Duri - Batu Ceper");
-        ruteList.add(rute);
-
-        rute = new Rute("Batu Ceper - Bandara");
-        ruteList.add(rute);
-        */
         mAdapter.notifyDataSetChanged();
     }
 
@@ -84,40 +66,16 @@ public class ListruteActivity extends AppCompatActivity implements RuteAdapter.O
                 startActivity(intent);
                 break;
             //third item
-     /*       case 2:
-                intent = new Intent(ListruteActivity.this, BksDurActivity.class);
+            case 2:
+                intent = new Intent(ListruteActivity.this, BniBanActivity.class);
                 startActivity(intent);
                 break;
             //fourth item
             case 3:
-                intent = new Intent(ListruteActivity.this, BksBatActivity.class);
+                intent = new Intent(ListruteActivity.this, BanBniActivity.class);
                 startActivity(intent);
                 break;
-            //fifth item
-            case 4:
-                intent = new Intent(ListruteActivity.this, BniBanActivity.class);
-                startActivity(intent);
-                break;
-            case 5:
-                intent = new Intent(ListruteActivity.this, BniDurActivity.class);
-                startActivity(intent);
-                break;
-            case 6:
-                intent = new Intent(ListruteActivity.this, BniBatActivity.class);
-                startActivity(intent);
-                break;
-            case 7:
-                intent = new Intent(ListruteActivity.this, DurBanActivity.class);
-                startActivity(intent);
-                break;
-            case 8:
-                intent = new Intent(ListruteActivity.this, DurBatActivity.class);
-                startActivity(intent);
-                break;
-            case 9:
-                intent = new Intent(ListruteActivity.this, BatBanActivity.class);
-                startActivity(intent);
-                break;
-      */  }
+
+        }
     }
 }

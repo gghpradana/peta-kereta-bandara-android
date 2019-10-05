@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         KA_btn = (LinearLayout) findViewById(R.id.KA_btn);
         rute_btn = (LinearLayout) findViewById(R.id.rute_btn);
         peta_btn = (LinearLayout) findViewById(R.id.peta_btn);
+        bawa_btn = findViewById(R.id.bawa_btn);
 
         aboutme.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent("android.intent.action.VIEW");
                 intent.setComponent(ComponentName.unflattenFromString("com.google.android.apps.maps/com.google.android.maps.MapsActivity"));
                 intent.setData(Uri.parse("https://www.google.co.id/maps/@-6.1921956,106.7428877,11z/data=!3m1!4b1!4m2!6m1!1s1U4uIqyg_IyRRvRfiFXp_LsTyWEoL_6x5?hl=id"));
+                startActivity(intent);
+            }
+        });
+
+        bawa_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this, BawaActivity.class);
                 startActivity(intent);
             }
         });
