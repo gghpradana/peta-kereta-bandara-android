@@ -3,10 +3,12 @@ package com.gipsy.kabandarasoetta;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,10 +32,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class StBandaraActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     CollapsingToolbarLayout collapsingToolbarLayout;
     private GoogleMap mMap;
+    private ViewPager viewPager;
+    private CircleIndicator circleIndicator;
+    private GamBanAdapter gamBanAdapter;
+    int currentPage = 0, NUM_PAGES = 8;
     private TextView stasiunnama, stasiunalamat, stasiunkoordinat, stasiunfasilitas;
     String id, nama, alamat, koordinat, fasilitas, lintang, bujur;
     LatLng latLng;
@@ -65,6 +73,26 @@ public class StBandaraActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
         params.setBehavior(behavior);
+
+        gamBanAdapter = new GamBanAdapter(this);
+        viewPager = findViewById(R.id.vpgambar);
+        viewPager.setAdapter(gamBanAdapter);
+        circleIndicator = findViewById(R.id.bulet);
+        circleIndicator.setViewPager(viewPager);
+
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+        handler.postDelayed(update, 500);
 
         stasiunnama = (TextView) findViewById(R.id.textnamastasiun);
         stasiunalamat = (TextView) findViewById(R.id.textalamatstasiun);
@@ -106,8 +134,7 @@ public class StBandaraActivity extends AppCompatActivity implements OnMapReadyCa
                                 mMap.addMarker(new MarkerOptions()
                                         .position(latLng)
                                         .title(nama)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.markertrain)));
+                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinlocationpergi24px)));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -4,19 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutActivity">
+    tools:context=".AboutActivity"
+    android:background="@color/colorPrimary">
 
     <TextView
+        android:id="@+id/textapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="303dp"
-        android:layout_marginBottom="324dp"
-        android:text="Created by GIGIH PRADANA"
+        android:layout_marginTop="32dp"
+        android:text="@string/app_name"
+        android:textColor="@color/Putih"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textversi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Versi 1.2"
+        android:textColor="@color/Putih"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textapp" />
+
+    <ImageView
+        android:id="@+id/logoapl"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/iconappnobg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textversi" />
+
+    <TextView
+        android:id="@+id/textcreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about"
+        android:textAlignment="center"
+        android:textColor="@color/Putih"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoapl" />
+
+    <ImageButton
+        android:id="@+id/iconemail"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/gmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcreate" />
+
+    <ImageButton
+        android:id="@+id/icontwitter"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="128dp"
+        android:background="@drawable/twitter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcreate" />
+
+    <ImageView
+        android:id="@+id/logoundip"
+        android:layout_width="131dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/undip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcreate" />
+
+    <TextView
+        android:id="@+id/geodesi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Geodetic Engineering\nDiponegoro University"
+        android:textAlignment="center"
+        android:textColor="@color/Putih"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoundip" />
+
 
 </android.support.constraint.ConstraintLayout>

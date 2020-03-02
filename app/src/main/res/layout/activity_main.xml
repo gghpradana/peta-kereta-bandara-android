@@ -7,8 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    
+
     <TextView
+        android:id="@+id/slmtdtg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -18,61 +19,70 @@
         android:textColor="@color/Putih"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    //Layout menu
-    <LinearLayout
-        android:orientation="vertical"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_height="250dp"
+        android:src="@drawable/imgmainmenu"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
         android:background="@drawable/bg_menu"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         //menu baris 1
+
         <LinearLayout
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingLeft="16dp"
+            android:paddingTop="24dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="24dp">
 
             //Perhentian Terdekat Button
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/bawa_btn"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_bawa"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_bawa"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="8dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="8dp"
                         android:src="@drawable/ic_pesawat" />
 
                     <TextView
-                        android:layout_marginLeft="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
                         android:text="Bawa \nSaya Ke Soetta"
                         android:textColor="@color/Putih"
                         android:textSize="18sp" />
@@ -81,32 +91,33 @@
             </LinearLayout>
 
             //Bawa saya ke Soetta
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/rute_btn"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_perhentian"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_perhentian"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="12dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="8dp"
                         android:src="@drawable/ic_rute" />
 
                     <TextView
-                        android:layout_marginLeft="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
                         android:text="Rute \nKA Bandara"
                         android:textColor="@color/Putih"
                         android:textSize="18sp" />
@@ -116,36 +127,38 @@
         </LinearLayout>
 
         //menu baris 2
+
         <LinearLayout
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
             //Peta Button
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/peta_btn"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_grey"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_grey"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="12dp"
-                        android:src="@drawable/ic_peta"
                         android:layout_width="50dp"
-                        android:layout_height="50dp" />
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_peta" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -159,50 +172,49 @@
             </LinearLayout>
 
             //KA Bandara Button
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/KA_btn"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_oren"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_oren"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="12dp"
-                        android:src="@drawable/ic_kereta"
                         android:layout_width="50dp"
-                        android:layout_height="50dp" />
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_kereta" />
 
                     <TextView
-                        android:layout_marginLeft="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
                         android:text="Stasiun \nKA Bandara"
                         android:textColor="@color/Putih"
                         android:textSize="18sp" />
 
                 </LinearLayout>
             </LinearLayout>
-
-
         </LinearLayout>
 
         <Button
             android:id="@+id/aboutme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About Me"
-            android:textAllCaps="false"
             android:layout_gravity="end"
             android:background="@drawable/bg_about"
+            android:text="About Me"
+            android:textAllCaps="false"
             android:textSize="14sp"
             android:textStyle="normal" />
 

@@ -15,7 +15,7 @@
         android:id="@+id/timeline"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:marker="@drawable/ic_stop"
+        app:marker="@drawable/ic_pergi"
         app:markerSize="20dp"
         app:lineWidth="3dp"
         app:startLineColor="@color/ruteprg"
@@ -31,7 +31,7 @@
             android:text="Stasiun"
             android:layout_marginLeft="14dp"
             android:layout_gravity="center_vertical"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp" />
     </LinearLayout>
@@ -45,7 +45,7 @@
             android:layout_marginLeft="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/ic_navigate_next_24px" />
     </LinearLayout>
 
 </LinearLayout>

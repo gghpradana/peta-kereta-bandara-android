@@ -3,10 +3,13 @@ package com.gipsy.kabandarasoetta;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,11 +34,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
+
 public class StBekasiActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     CollapsingToolbarLayout collapsingToolbarLayout;
     private GoogleMap mMap;
     private TextView stasiunnama, stasiunalamat, stasiunkoordinat, stasiunfasilitas;
+    private ViewPager viewPager;
+    private CircleIndicator circleIndicator;
+    private GamBksAdapter gamBksAdapter;
+    int currentPage = 0, NUM_PAGES = 8;
     String id, nama, alamat, koordinat, fasilitas, lintang, bujur;
     LatLng latLng;
 
@@ -67,6 +79,32 @@ public class StBekasiActivity extends AppCompatActivity implements OnMapReadyCal
         });
         params.setBehavior(behavior);
 
+        gamBksAdapter = new GamBksAdapter(this);
+        viewPager = findViewById(R.id.vpgambar);
+        viewPager.setAdapter(gamBksAdapter);
+        circleIndicator = findViewById(R.id.bulet);
+        circleIndicator.setViewPager(viewPager);
+
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+        handler.postDelayed(update, 500);
+        /*new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 100, 6000);
+*/
         stasiunnama = (TextView) findViewById(R.id.textnamastasiun);
         stasiunalamat = (TextView) findViewById(R.id.textalamatstasiun);
         stasiunkoordinat = (TextView) findViewById(R.id.textKoordinat);
@@ -107,8 +145,7 @@ public class StBekasiActivity extends AppCompatActivity implements OnMapReadyCal
                                     mMap.addMarker(new MarkerOptions()
                                             .position(latLng)
                                             .title(nama)
-                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.markertrain)));
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinlocationpergi24px)));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

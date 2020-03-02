@@ -68,7 +68,7 @@ public class JadBanrActivity extends AppCompatActivity {
                         JSONObject data = response.getJSONObject(i);
 
                         JadKeb jadKeb = new JadKeb();
-                        jadKeb.setJadwalKeb(data.getString("KEBERANGKATAN").replace(":00", " Menuju ST. Bekasi"));
+                        jadKeb.setJadwalKeb(data.getString("KEBERANGKATAN").replace(":00", " Menuju ST. Batu Ceper"));
 
                         jadKebList.add(jadKeb);
                     }

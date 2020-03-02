@@ -123,7 +123,8 @@ public class BanBniActivity extends AppCompatActivity implements OnMapReadyCallb
                         mMap.addMarker(new MarkerOptions()
                                 .position(latLng)
                                 .title(nama)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                                //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinlocationpulang24px)));
 
                         RBanBni rBanBni = new RBanBni();
                         rBanBni.setStopanbanbni(data.getString("NAMA_STASIUN"));

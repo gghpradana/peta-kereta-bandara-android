@@ -83,7 +83,7 @@ public class JadDurrActivity extends AppCompatActivity {
                         JSONObject data = response.getJSONObject(i);
 
                         JadKeb jadKeb = new JadKeb();
-                        jadKeb.setJadwalKeb(data.getString("KEBERANGKATAN").replace(":00", " Menuju ST. Bekasi"));
+                        jadKeb.setJadwalKeb(data.getString("KEBERANGKATAN").replace(":00", " Menuju ST. BNI City"));
 
                         JadKed jadKed = new JadKed();
                         jadKed.setJadwalKed(data.getString("KEDATANGAN").replace(":00"," Tiba dari ST. Batu Ceper"));

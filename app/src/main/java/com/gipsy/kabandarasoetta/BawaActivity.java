@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,9 +14,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class BawaActivity extends AppCompatActivity {
@@ -23,7 +27,7 @@ public class BawaActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener date;
     EditText tglterbang, jamterbang;
     Button go_btn;
-    String staspilihan, tarif, stasdb, eta;
+    String staspilihan, tarif, stasdb, eta, tbl, map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,13 @@ public class BawaActivity extends AppCompatActivity {
 
         final Spinner mySpinner = (Spinner) findViewById(R.id.spinnerstas);
 
-        String[] items = new String[]{ "-Pilih-","Stasiun Bekasi", "Stasiun BNI City", "Stasiun Duri",
-                "Stasiun Batu Ceper"};
+        List<String> items = new ArrayList<>();
+        items.add(0, "-Pilih-");
+        items.add("Stasiun Bekasi");
+        items.add("Stasiun BNI City");
+        items.add("Stasiun Duri");
+        items.add("Stasiun Batu Ceper");
+
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         mySpinner.setAdapter(adapter);
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -45,29 +54,37 @@ public class BawaActivity extends AppCompatActivity {
                         tarif = "null";
                         stasdb = "null";
                         eta = "null";
+                        map = "null";
                         break;
                     case 1: staspilihan = adapterView.getItemAtPosition(position).toString();
                         tarif = "Rp 100.000";
                         stasdb = "BEKASI";
                         eta = "90 Menit";
+                        tbl = "bekasi_keberangkatan_pergi";
+                        map = "Stasiun+Bekasi";
                         break;
                     case 2: staspilihan = adapterView.getItemAtPosition(position).toString();
                         tarif = "Rp 70.000";
                         stasdb = "BNI_CITY";
                         eta = "46 Menit";
+                        tbl = "jadwal_keberangkatan_pergi";
+                        map = "Stasiun+BNI+City";
                         break;
                     case 3: staspilihan = adapterView.getItemAtPosition(position).toString();
                         tarif = "Rp 70.000";
                         stasdb = "DURI";
                         eta = "31 Menit";
+                        tbl = "jadwal_keberangkatan_pergi";
+                        map = "Stasiun+Duri";
                         break;
                     case 4: staspilihan = adapterView.getItemAtPosition(position).toString();
                         tarif = "Rp 35.000";
                         stasdb = "BATU_CEPER";
                         eta = "20 Menit";
+                        tbl = "jadwal_keberangkatan_pergi";
+                        map = "Stasiun+Batu+Ceper";
                         break;
                 }
-
             }
 
             @Override
@@ -83,14 +100,26 @@ public class BawaActivity extends AppCompatActivity {
         go_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BawaActivity.this, ResultBawaActivity.class);
-                intent.putExtra("tglterbang", tglterbang.getText().toString());
-                intent.putExtra("jamterbang", jamterbang.getText().toString());
-                intent.putExtra("stasiun", staspilihan);
-                intent.putExtra("tarif", tarif);
-                intent.putExtra("eta", eta);
-                intent.putExtra("stasdb", stasdb);
-                startActivity(intent);
+                if(TextUtils.isEmpty(tglterbang.getText())) {
+                    Toast.makeText(getApplicationContext(), "Tanggal tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                    tglterbang.setError("Harap Masukkan Tanggal");
+                } else if (TextUtils.isEmpty((jamterbang.getText()))){
+                    Toast.makeText(getApplicationContext(), "Jam tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                    jamterbang.setError("Harap Masukkan Tanggal");
+                } else if (mySpinner.getSelectedItem().toString().matches("-Pilih-")){
+                    Toast.makeText(getApplicationContext(), "Stasiun belum dipilih", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(BawaActivity.this, ResultBawaActivity.class);
+                    intent.putExtra("tglterbang", tglterbang.getText().toString());
+                    intent.putExtra("jamterbang", jamterbang.getText().toString());
+                    intent.putExtra("stasiun", staspilihan);
+                    intent.putExtra("tarif", tarif);
+                    intent.putExtra("eta", eta);
+                    intent.putExtra("stasdb", stasdb);
+                    intent.putExtra("tabel", tbl);
+                    intent.putExtra("map", map);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -131,7 +160,7 @@ public class BawaActivity extends AppCompatActivity {
 
                     }
                     }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
+
                 mTimePicker.show();
             }
         });

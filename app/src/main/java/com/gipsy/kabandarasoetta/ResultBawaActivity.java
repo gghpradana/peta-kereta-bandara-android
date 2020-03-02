@@ -3,6 +3,7 @@ package com.gipsy.kabandarasoetta;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,8 +32,9 @@ import java.util.List;
 
 public class ResultBawaActivity extends AppCompatActivity {
     Button btn_ptnjk;
-    TextView staspilihan, tarif, estimasi;
-    String stasiun, jam;
+    ImageButton infobtn;
+    TextView staspilihan, tarif, estimasi, jdwlplhn;
+    String stasiun, jam, tbl, map;
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     private List<PilihanJadwal> pilihanJadwalList;
@@ -44,6 +49,16 @@ public class ResultBawaActivity extends AppCompatActivity {
         staspilihan = findViewById(R.id.viastasiun);
         tarif = findViewById(R.id.texttarif);
         estimasi = findViewById(R.id.texteta);
+        jdwlplhn = findViewById(R.id.jdwlplhn);
+        infobtn = findViewById(R.id.infobtn);
+
+        infobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Pilih jadwal maks 2 jam sebelum jam terbang pesawat anda",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         staspilihan.setText(getIntent().getStringExtra("stasiun"));
         tarif.setText(getIntent().getStringExtra("tarif"));
@@ -52,7 +67,13 @@ public class ResultBawaActivity extends AppCompatActivity {
         Log.d(stasiun, "stasdb");
         jam = getIntent().getExtras().getString("jamterbang");
         Log.d(jam, "jamterbang");
-
+        tbl = getIntent().getExtras().getString("tabel");
+        Log.d(tbl, "tabel");
+        map = getIntent().getExtras().getString("map");
+        Log.d(map, "map");
+        String jadwal = "Tanggal ";
+        String sblmjam = " sebelum jam ";
+        jdwlplhn.setText(jadwal + (getIntent().getStringExtra("tglterbang")) + sblmjam + jam);
 
         recyclerView = findViewById(R.id.rv_hasilbw);
         pilihanJadwalList = new ArrayList<>();
@@ -68,6 +89,19 @@ public class ResultBawaActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(mAdapter);
 
+        btn_ptnjk = findViewById(R.id.btn_ptnjk);
+        btn_ptnjk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=" + map);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
+
         getData();
     }
 
@@ -76,7 +110,8 @@ public class ResultBawaActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        String url = "https://gipsygis.000webhostapp.com/api/gipsy/getjadwalkebpergi.php?stasiun=" + stasiun + "&jam=" + jam;
+        String url = "https://gipsygis.000webhostapp.com/api/gipsy/getjadwalkebpergi.php?stasiun="
+                + stasiun + "&jam=" + jam + "&tbl=" + tbl;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

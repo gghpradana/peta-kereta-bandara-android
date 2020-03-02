@@ -16,11 +16,11 @@ public class PilihanJadwalAdapter extends RecyclerView.Adapter<PilihanJadwalAdap
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView JadwalBks;
+        public TextView JadwalBw;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            JadwalBks = itemView.findViewById(R.id.jadwal_bks);
+            JadwalBw = itemView.findViewById(R.id.jadbw);
         }
     }
 
@@ -32,14 +32,14 @@ public class PilihanJadwalAdapter extends RecyclerView.Adapter<PilihanJadwalAdap
     @Override
     public PilihanJadwalAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(context)
-                .inflate(R.layout.jadbks_list, parent, false);
+                .inflate(R.layout.bawa_list, parent, false);
         return new PilihanJadwalAdapter.ViewHolder(itemview);
     }
 
     @Override
     public void onBindViewHolder(PilihanJadwalAdapter.ViewHolder Holder, int position) {
         PilihanJadwal pilihanJadwal = pilihanJadwalList.get(position);
-        Holder.JadwalBks.setText(String.valueOf(pilihanJadwal.getPilihjadwal()));
+        Holder.JadwalBw.setText(String.valueOf(pilihanJadwal.getPilihjadwal()));
 
     }
 

@@ -124,7 +124,8 @@ public class BksBanActivity extends AppCompatActivity implements OnMapReadyCallb
                         mMap.addMarker(new MarkerOptions()
                                 .position(latLng)
                                 .title(nama)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                                //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pinlocationpergi24px)));
 
                         RBksban rBksban = new RBksban();
                         rBksban.setStopanbksban(data.getString("NAMA_STASIUN"));
